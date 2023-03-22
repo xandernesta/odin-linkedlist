@@ -66,14 +66,12 @@ const LinkedList = () => {
         if(!head) return null;
         if(head.nextNode === null){
             head = null
-        }
-        if(size()>0){
+            count = 0
+        } else if(size()>0){
             at(size()-1).nextNode = null
+            count--
         }
-        else {
-            head = null
-        }
-        count--;
+
 
     }
     //traverse the whole list and print out each node value as a string
@@ -137,4 +135,18 @@ console.log(list.toString())
 list.pop()
 console.log('another pop should have no list:')
 console.log(list.toString())
+list.prepend("new actual first")
+console.log('size:'+list.size())
+console.log('head:')
+console.log(list.findHead())
+console.log(' ')
 
+console.log(list.toString())
+console.log('count:' + list.size())
+list.pop()
+console.log('another pop should have no list:')
+console.log(list.toString())
+console.log(list.size())
+list.prepend("new actual first")
+console.log(list.size())
+console.log(list.toString())
