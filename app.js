@@ -71,8 +71,30 @@ const LinkedList = () => {
             at(size()-1).nextNode = null
             count--
         }
-
-
+    }
+    //search list for a node containing a value, if its there return true, else return false
+    const contains = (val) =>{
+        let current = head
+        let exists = false  
+        while(current.nextNode){
+            if(current.value == val){
+                return exists = true
+            }
+            current = current.nextNode
+        }
+        return exists
+    }
+    //
+    const find = (val) => {
+        let tmp = head;
+        let valArray = [];
+        while (tmp){
+            valArray.push(tmp.value)
+            tmp = tmp.nextNode
+        }
+        if(valArray.indexOf(val) < 0){
+            return 'not found'
+        } else return valArray.indexOf(val)
     }
     //traverse the whole list and print out each node value as a string
     const toString = () => {
@@ -89,6 +111,32 @@ const LinkedList = () => {
         }
         return str
     }
+
+    const insertAt = (val,index) =>{
+        let current = head
+        let prev = null
+        for(let i=0; i < index; i++){
+            prev = current
+            current = current.nextNode
+        }
+        if (!prev) head = Node(val,current)
+        else prev.nextNode = Node(val,current)
+        count++
+    }
+    const removeAt = (index) =>{
+        let current = head
+        let prev = null
+        for(let i=0; i < index; i++){
+            prev = current
+            current = current.nextNode
+        }
+        if (!prev){
+            head = head.nextNode
+        }else{
+            prev.nextNode = current.nextNode
+        }
+        count--
+    }
     return {
         append,
         prepend,
@@ -97,10 +145,11 @@ const LinkedList = () => {
         tail,
         at,
         pop,
-        //contains,
-        //find,
-        toString
-
+        contains,
+        find,
+        toString,
+        insertAt,
+        removeAt
     }
 }
 
@@ -123,7 +172,7 @@ console.log(list.toString())
 console.log(list.at(4)) */
 console.log('head:')
 console.log(list.findHead())
-list.pop()
+/* list.pop()
 console.log('list after pop:')
 console.log(list.toString())
 list.pop()
@@ -134,19 +183,26 @@ console.log('list after 3rd pop:')
 console.log(list.toString())
 list.pop()
 console.log('another pop should have no list:')
-console.log(list.toString())
+console.log(list.toString()) */
 list.prepend("new actual first")
 console.log('size:'+list.size())
 console.log('head:')
 console.log(list.findHead())
 console.log(' ')
 
-console.log(list.toString())
+//console.log(list.toString())
 console.log('count:' + list.size())
-list.pop()
-console.log('another pop should have no list:')
-console.log(list.toString())
-console.log(list.size())
-list.prepend("new actual first")
 console.log(list.size())
 console.log(list.toString())
+/* console.log(list.contains("second"))
+console.log(list.find('new actual first'))
+ */
+console.log('inserting new node: "hi" at index 0')
+list.insertAt('hi', 0)
+console.log('count:' + list.size())
+console.log(list.size())
+console.log(list.toString())
+/* list.removeAt(0)
+console.log('count:' + list.size())
+console.log(list.size())
+console.log(list.toString()) */
